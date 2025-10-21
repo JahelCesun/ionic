@@ -9,16 +9,29 @@ const routes: Routes = [
   },
   {
     path: 'lista-personajes',
-    loadChildren: () => import('./pages/lista-personajes/lista-personajes.module').then(m => m.ListaPersonajesPageModule)
+    loadChildren: () =>
+      import('./pages/lista-personajes/lista-personajes.module').then(
+        (m) => m.ListaPersonajesPageModule
+      ),
   },
   {
     path: 'detalle-personaje/:id',
-    loadChildren: () => import('./pages/detalle-personaje/detalle-personaje.module').then(m => m.DetallePersonajePageModule)
-  }
+    loadChildren: () =>
+      import('./pages/detalle-personaje/detalle-personaje.module').then(
+        (m) => m.DetallePersonajePageModule
+      ),
+  },
+  // 👇 ESTA PARTE FALTABA
+  {
+    path: '**',
+    redirectTo: 'lista-personajes',
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
